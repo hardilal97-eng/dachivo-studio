@@ -67,7 +67,7 @@ let pid="";
 async function create(){
 const r=await fetch("/api/episodes",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({title:document.getElementById("title").value,idea:document.getElementById("idea").value})});
 const v=await r.json();if(!r.ok){document.getElementById("out").textContent=JSON.stringify(v);return;}
-pid=v.id;document.getElementById("out").textContent=v.shots.map(s=>"SHOT "+String(s.number).padStart(2,"0")+" | "+s.start+"–"+s.end+" sec\n"+s.prompt).join("\n\n");
+pid=v.id;document.getElementById("out").textContent=v.shots.map(s=>"SHOT "+String(s.number).padStart(2,"0")+" | "+s.start+"–"+s.end+" sec"+String.fromCharCode(10)+s.prompt).join(String.fromCharCode(10,10));
 document.getElementById("upload").innerHTML='<h2>Upload klip Google Flow</h2><p>Gunakan nama 001.mp4, 002.mp4, ... sesuai urutan.</p><input type="file" id="files" multiple accept="video/mp4"><button onclick="upload()">Upload klip</button><button onclick="assemble()">Gabungkan MP4</button><p id="status"></p>';
 }
 async function upload(){
